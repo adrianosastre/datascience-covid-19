@@ -1,116 +1,86 @@
 def add6ColFile (date, df, main_df) :
-    
-  nrows = 0
-  for index, row in df.iterrows():
-    nrows = nrows + 1
-    country = row['Country/Region']
-    if country == 'Mainland China' :
-      country = 'China'
 
-    main_df = main_df.append(
-      {
-        "Date": date,
-        "Country": country,
-        "State": row['Province/State'],
-        "TotalConfirmed": row['Confirmed'],
-        "TotalDeaths": row['Deaths'],
-        "TotalRecovered": row['Recovered']
-      }
-    , ignore_index=True)
+  df = df.rename(columns =
+    {
+      'Last Update' : 'Date',
+      'Country/Region' : 'Country',
+      'Province/State' : 'State',
+      'Confirmed' : 'TotalConfirmed',
+      'Deaths' : 'TotalDeaths',
+      'Recovered': 'TotalRecovered'
+    }
+  )
 
-    if nrows % 100 == 0 :
-      print('.')
-    else :
-      print('.', end = '')
+  df['Date'] = date
 
-  print('\n')
+  main_df = main_df.append(df)
   return main_df
 
-def add8ColFile(date, df, main_df) :  
+def add8ColFile(date, df, main_df) :
 
-  nrows = 0
-  for index, row in df.iterrows():
-    
-    nrows = nrows + 1
-    country = row['Country/Region']
-    if country == 'Mainland China' :
-      country = 'China'
+  df = df.rename(columns =
+    {
+      'Last Update' : 'Date',
+      'Country/Region' : 'Country',
+      'Province/State' : 'State',
+      'Confirmed' : 'TotalConfirmed',
+      'Deaths' : 'TotalDeaths',
+      'Recovered': 'TotalRecovered'
+    }
+  )
 
-    main_df = main_df.append(
-      {
-        "Date": date,
-        "Country": country,
-        "State": row['Province/State'],
-        "TotalConfirmed": row['Confirmed'],
-        "TotalDeaths": row['Deaths'],
-        "TotalRecovered": row['Recovered'],
-        "Latitude": row['Latitude'],
-        "Longitude": row['Longitude']
-      }
-    , ignore_index=True)
+  df['Date'] = date
 
-    if nrows % 100 == 0 :
-      print('.')
-    else :
-      print('.', end = '')
-
-  print('\n')
+  main_df = main_df.append(df)
   return main_df
 
 def add12ColFile(date, df, main_df) :
 
-  nrows = 0
-  for index, row in df.iterrows():
 
-    nrows = nrows + 1
-    main_df = main_df.append(
-      {
-        "Date": date,
-        "Country": row['Country_Region'],
-        "State": row['Province_State'],
-        "City": row['Admin2'],
-        "TotalConfirmed": row['Confirmed'],
-        "TotalDeaths": row['Deaths'],
-        "TotalRecovered": row['Recovered'],
-        "Latitude": row['Lat'],
-        "Longitude": row['Long_']
-      }
-    , ignore_index=True)
+  df = df.rename(columns =
+    {
+      'Last_Update' : 'Date',
+      'Country_Region' : 'Country',
+      'Province_State' : 'State',
+      'Admin2' : 'City',
+      'Lat' : 'Latitude',
+      'Long_' : 'Longitude',
+      'Confirmed' : 'TotalConfirmed',
+      'Deaths' : 'TotalDeaths',
+      'Recovered': 'TotalRecovered',
+      'Active': 'TotalActive'
+    }
+  )
 
-    if nrows % 100 == 0 :
-      print('.')
-    else :
-      print('.', end = '')
+  df['Date'] = date
 
-  print('\n')
+  df = df.drop(columns=['FIPS', 'Combined_Key'])
+
+  main_df = main_df.append(df)
   return main_df
 
 def add14ColFile(date, df, main_df) :
 
-  nrows = 0
-  for index, row in df.iterrows():
+  df = df.rename(columns =
+    {
+      'Last_Update' : 'Date',
+      'Country_Region' : 'Country',
+      'Province_State' : 'State',
+      'Admin2' : 'City',
+      'Lat' : 'Latitude',
+      'Long_' : 'Longitude',
+      'Confirmed' : 'TotalConfirmed',
+      'Deaths' : 'TotalDeaths',
+      'Recovered': 'TotalRecovered',
+      'Active': 'TotalActive',
+      'Incidence_Rate': 'IncidenceRate',
+      'Case-Fatality_Ratio': 'CaseFatalityRatio'
+    }
+  )
 
-    nrows = nrows + 1
-    main_df = main_df.append(
-        {
-          "Date": date,
-          "Country": row['Country_Region'],
-          "State": row['Province_State'],
-          "City": row['Admin2'],
-          "TotalConfirmed": row['Confirmed'],
-          "TotalDeaths": row['Deaths'],
-          "TotalRecovered": row['Recovered'],
-          "Latitude": row['Lat'],
-          "Longitude": row['Long_'],
-          "IncidenceRate": row['Incidence_Rate'],
-          "CaseFatalityRatio": row['Case-Fatality_Ratio']
-        }
-      , ignore_index=True)
-    
-    if nrows % 100 == 0 :
-      print('.')
-    else :
-      print('.', end = '')
+  df['Date'] = date
 
-  print('\n')
+  df = df.drop(columns=['FIPS', 'Combined_Key'])
+
+  main_df = main_df.append(df)
   return main_df
